@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         // Mata in chi2-resultatet i getP() och ta emot p-värdet
         double pValue = Significance.getP(chi2);
 
-        double sign = Double.parseDouble(sharedPref.getString("Signifikansnivå","0"));
+        double sign = Double.parseDouble(sharedPref.getString("Signifikansnivå","0.0"));
 
         double prop = 100 - pValue;
 
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
          *    med signifikansnivån, visa reultatet åt användaren
          *
          */
+
         if (pValue < 0.05)
         {
             dep = "signifikant";
@@ -169,11 +170,12 @@ public class MainActivity extends AppCompatActivity {
                 procent2
         )));
 
-        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.2f \n Signifikansnivå: %.2f \n Resultatet är med %.2f% sannolikhet inte oberoende och kan betraktas som "+dep,
+        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.2f \n Signifikansnivå: %.2f \n Resultatet är med %.2f% sannolikhet inte oberoende och kan betraktas som %s",
                 chi2,
                 pValue,
                 sign,
-                prop
+                prop,
+                dep
         ));
     }
     public void openSettings(View view) {

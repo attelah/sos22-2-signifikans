@@ -29,7 +29,7 @@
 
         <EditTextPreference
             app:key="Signifikansnivå"
-            app:title="0.05"
+            app:title="Signifikansnivå"
             app:useSimpleSummaryProvider="true" />
 
 
