@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         // Mata in chi2-resultatet i getP() och ta emot p-värdet
         double pValue = Significance.getP(chi2);
 
-        double sign = Double.parseDouble(sharedPref.getString("Signifikansnivå","0.0"));
+        double sign = Double.parseDouble(sharedPref.getString("Signifikansnivå","0.05"));
 
         double prop = 100 - pValue;
 
