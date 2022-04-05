@@ -63,8 +63,17 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.button3) val3++;
         if (view.getId() == R.id.button4) val4++;
 
+        // Börja om knappen
+        if (view.getId() == R.id.buttonReset) {
+            val1 = 0;
+            val2 = 0;
+            val3 = 0;
+            val4 = 0;
+        }
+
         // Slutligen, kör metoden som ska räkna ut allt!
         calculate();
+
     }
 
     /**
@@ -77,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         btn2.setText(String.valueOf(val2));
         btn3.setText(String.valueOf(val3));
         btn4.setText(String.valueOf(val4));
+
+        // Om alla värden = 0, return, annars crashar appen
+        if (val1+val2+val3+val4 == 0) return;
 
         // Mata in värdena i Chi-2-uträkningen och ta emot resultatet
         // i en Double-variabel
