@@ -2,9 +2,13 @@ package fi.arcada.projekt_chi2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,11 +17,20 @@ public class MainActivity extends AppCompatActivity {
     // Deklarera 4 heltalsvariabler för knapparnas värden
     int val1, val2, val3, val4;
 
+    TextView textOut;
+    TextView textWelcome;
+    int launchCount= 0;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor prefEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textOut = findViewById(R.id.counter);
+        textWelcome = findViewById(R.id.welcome);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Koppla samman Button-objekten med knapparna i layouten
         btn1 = findViewById(R.id.button1);
@@ -25,7 +38,14 @@ public class MainActivity extends AppCompatActivity {
         btn3 = findViewById(R.id.button3);
         btn4 = findViewById(R.id.button4);
 
+        prefEditor = sharedPref.edit();
+        prefEditor.putInt("launchCount", sharedPref.getInt("launchCount", 0)+1);
+        prefEditor.apply();
+        launchCount = sharedPref.getInt("launchCount", 0);
 
+
+        textOut.setText(String.format("Appen startad %d gånger", launchCount));
+        textWelcome.setText(String.format("Välkommen tillbaka %s", sharedPref.getString("userName", null)));
     }
 
     /**
@@ -77,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
          */
 
     }
+    public void openSettings(View view) {
 
+        Intent intent = new Intent (this, SettingsActivity.class);
+        startActivity(intent);
+    }
 
 }

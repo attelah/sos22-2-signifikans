@@ -1,10 +1,15 @@
 package fi.arcada.projekt_chi2;
 
+import android.content.Intent;
+import android.view.View;
+
 public class Significance {
 
     /**
      * Metod som räknar ut Chi-två på basis av fyra observerade värden (o1 - o4).
      */
+    double chiResult;
+
     public static double chiSquared(int o1, int o2, int o3, int o4) {
 
         // heltalsvariabler tänkta att få de förväntade värdena
@@ -13,17 +18,23 @@ public class Significance {
         /**
          *  Implementera din egen Chi-två-uträkning här!
          *
-         *  1.  Räkna de förväntade värdena, spara resultaten i e1 - e4
-         *
-         *  2.  Använd de observerade värdena (o1 - o4) och de förväntade
-         *      värdena (e1 - e4) för att räkna ut Chi-två enligt formeln.
-         *
-         *  3.  returnera resultatet
-         *      (använd det sedan för att få p-värdet via getP()
-         *
-         * */
+         *  1.  Räkna de förväntade värdena, spara resultaten i e1 - e4**/
 
-        return 0.0;
+        e1 = ((o1 + o3)*(o1 + o2)) / (o1+o2+o3+o4);
+        e2 = ((o2 + o4)*(o1 + o2)) / (o1+o2+o3+o4);
+        e3 = ((o1 + o3)*(o3 + o4)) / (o1+o2+o3+o4);
+        e4 = ((o2 + o4)*(o3 + o4)) / (o1+o2+o3+o4);
+        /**  2.  Använd de observerade värdena (o1 - o4) och de förväntade
+        *      värdena (e1 - e4) för att räkna ut Chi-två enligt formeln.**/
+        double x1 = Math.pow(o1-e1, 2) / e1;
+        double x2 = Math.pow(o2-e2, 2) / e2;
+        double x3 = Math.pow(o3-e3, 2) / e3;
+        double x4 = Math.pow(o4-e4, 2) / e4;
+
+        /**  3.  returnera resultatet
+        *      (använd det sedan för att få p-värdet via getP()
+        * */
+        return x1+x2+x3+x4;
     }
 
 
@@ -51,5 +62,6 @@ public class Significance {
         return p;
 
     }
+
 
 }

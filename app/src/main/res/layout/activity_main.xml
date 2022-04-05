@@ -7,14 +7,28 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="95dp"
-        android:layout_height="24dp"
+        android:id="@+id/counter"
+        android:layout_width="166dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="243dp"
-        tools:layout_editor_absoluteY="299dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/percent2"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.279"
+        app:layout_constraintStart_toEndOf="@+id/percent1"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -32,14 +46,14 @@
                 android:layout_column="1"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="4dp"
-                android:text="textViewCol1" />
+                android:text="Anställd" />
 
             <TextView
                 android:id="@+id/textViewCol2"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="4dp"
-                android:text="textViewCol2" />
+                android:text="Arbetslös" />
 
         </TableRow>
 
@@ -51,7 +65,7 @@
                 android:id="@+id/textViewRow1"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="4dp"
-                android:text="textViewRow1" />
+                android:text="Motionerar regelbundet" />
 
             <Button
                 android:id="@+id/button1"
@@ -79,7 +93,7 @@
                 android:id="@+id/textViewRow2"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="4dp"
-                android:text="textViewRow2" />
+                android:text="Motionerar icke" />
 
             <Button
                 android:id="@+id/button3"
@@ -102,33 +116,62 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="98dp"
-        android:layout_height="22dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="299dp" />
+        android:layout_width="134dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Motionerar regelbundet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="99dp"
-        android:layout_height="23dp"
+        android:id="@+id/percent1"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="299dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="225dp"
-        android:layout_height="216dp"
+        android:layout_width="218dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="24dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="366dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:text="Börja om"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="621dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:onClick="openSettings"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:srcCompat="@android:drawable/ic_menu_manage" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="313dp"
+        android:layout_height="26dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="32dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
