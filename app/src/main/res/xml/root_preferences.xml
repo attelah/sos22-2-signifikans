@@ -27,6 +27,12 @@
             app:title="Aktivitet 2"
             app:useSimpleSummaryProvider="true" />
 
+        <EditTextPreference
+            app:key="Signifikansnivå"
+            app:title="0.05"
+            app:useSimpleSummaryProvider="true" />
+
+
         <ListPreference
             app:defaultValue="reply"
             app:entries="@array/reply_entries"

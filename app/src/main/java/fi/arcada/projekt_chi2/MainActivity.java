@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     // Deklarera 4 heltalsvariabler för knapparnas värden
     int val1, val2, val3, val4;
 
-    TextView textOut;
-    TextView textWelcome;
+    TextView textOut, textWelcome, textResults, textProcent1, textProcent2, testGrp1, testGrp2, test1, test2, statement;
+
     int launchCount= 0;
     SharedPreferences sharedPref;
     SharedPreferences.Editor prefEditor;
@@ -30,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
         textOut = findViewById(R.id.counter);
         textWelcome = findViewById(R.id.welcome);
+        textResults = findViewById(R.id.results);
+        textProcent1 = findViewById(R.id.percent1);
+        textProcent2 = findViewById(R.id.percent2);
+        testGrp1 = findViewById(R.id.testGrp1);
+        testGrp2 = findViewById(R.id.testGrp2);
+        test1 = findViewById(R.id.test1);
+        test2 = findViewById(R.id.test2);
+        statement = findViewById(R.id.statement);
+
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Koppla samman Button-objekten med knapparna i layouten
@@ -46,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         textOut.setText(String.format("Appen startad %d gånger", launchCount));
         textWelcome.setText(String.format("Välkommen tillbaka %s", sharedPref.getString("userName", null)));
+
+        testGrp1.setText(String.format(sharedPref.getString("testGrp1","Anställd")));
+        testGrp2.setText(String.format(sharedPref.getString("testGrp2","Arbetslös")));
+        test1.setText(String.format(sharedPref.getString("test1","Motionerar regelbundet")));
+        test2.setText(String.format(sharedPref.getString("test2","Motionerar inte")));
+        statement.setText(String.format(sharedPref.getString("test1","Motionerar regelbundet")));
     }
 
     /**
@@ -97,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
         // Mata in chi2-resultatet i getP() och ta emot p-värdet
         double pValue = Significance.getP(chi2);
 
+        double sign = Double.parseDouble(sharedPref.getString("Signifikansnivå","0"));
+
+        double prop = 100 - pValue;
+
+        double procent1 = (val1 / (val1+val3)) * 100;
+        double procent2 = (val2 / (val2+val4)) * 100;
+
+        String dep;
         /**
          *  - Visa chi2 och pValue åt användaren på ett bra och tydligt sätt!
          *
@@ -107,7 +130,30 @@ public class MainActivity extends AppCompatActivity {
          *    med signifikansnivån, visa reultatet åt användaren
          *
          */
+        if (pValue < 0.05)
+        {
+            dep = "signifikant";
+        }
+        else
+        {
+            dep = "insignifikant";
+        }
 
+        textProcent1.setText((String.format("%s: %.2f",
+                (sharedPref.getString("testGrp1",null)),
+                procent1
+        )));
+        textProcent2.setText((String.format("%s: %.2f",
+                (sharedPref.getString("testGrp2",null)),
+                procent2
+        )));
+
+        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.2f \n Signifikansnivå: %.2f \n Resultatet är med %.2f% sannolikhet inte oberoende och kan betraktas som "+dep,
+                chi2,
+                pValue,
+                sign,
+                prop
+        ));
     }
     public void openSettings(View view) {
 
