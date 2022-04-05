@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *  Klickhanterare för knapparna
+      Klickhanterare för knapparna
      */
     public void buttonClick(View view) {
 
