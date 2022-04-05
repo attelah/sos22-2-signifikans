@@ -162,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textProcent1.setText((String.format("%s: %.2f",
-                (sharedPref.getString("testGrp1",null)),
+                (sharedPref.getString("testGrp1","0")),
                 procent1
         )));
         textProcent2.setText((String.format("%s: %.2f",
-                (sharedPref.getString("testGrp2",null)),
+                (sharedPref.getString("testGrp2","0")),
                 procent2
         )));
 
