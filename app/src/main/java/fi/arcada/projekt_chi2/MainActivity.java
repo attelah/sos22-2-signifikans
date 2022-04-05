@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         test1.setText(String.format(sharedPref.getString("test1","Motionerar regelbundet")));
         test2.setText(String.format(sharedPref.getString("test2","Motionerar inte")));
         statement.setText(String.format(sharedPref.getString("test1","Motionerar regelbundet")));
+
+        // Visa färdigt sparade värden och räkningarna när man öppnar appen
+        calculate();
     }
 
     /**
@@ -73,28 +76,46 @@ public class MainActivity extends AppCompatActivity {
         Button btn = (Button) view;
 
         // Kontrollera vilken knapp som klickats, öka värde på rätt vaiabel
-        if (view.getId() == R.id.button1) val1++;
-        if (view.getId() == R.id.button2) val2++;
-        if (view.getId() == R.id.button3) val3++;
-        if (view.getId() == R.id.button4) val4++;
+        if (view.getId() == R.id.button1) pref("val1");
+        if (view.getId() == R.id.button2) pref("val2");
+        if (view.getId() == R.id.button3) pref("val3");
+        if (view.getId() == R.id.button4) pref("val4");
 
         // Börja om knappen
         if (view.getId() == R.id.buttonReset) {
-            val1 = 0;
-            val2 = 0;
-            val3 = 0;
-            val4 = 0;
+            pref("reset");
         }
 
         // Slutligen, kör metoden som ska räkna ut allt!
         calculate();
-
     }
+
+    // Sparar värdena
+    public void pref(String val) {
+        prefEditor = sharedPref.edit();
+        if (val == "reset") {
+            prefEditor.putInt("val1",0);
+            prefEditor.putInt("val2",0);
+            prefEditor.putInt("val3",0);
+            prefEditor.putInt("val4",0);
+        }
+        else {
+            prefEditor.putInt(val, sharedPref.getInt(val, 0) + 1);
+        }
+        prefEditor.apply();
+    }
+
 
     /**
      * Metod som uppdaterar layouten och räknar ut själva analysen.
      */
     public void calculate() {
+
+        // Hämtar sparade värden
+        val1 = sharedPref.getInt("val1", 0);
+        val2 = sharedPref.getInt("val2", 0);
+        val3 = sharedPref.getInt("val3", 0);
+        val4 = sharedPref.getInt("val4", 0);
 
         // Uppdatera knapparna med de nuvarande värdena
         btn1.setText(String.valueOf(val1));
