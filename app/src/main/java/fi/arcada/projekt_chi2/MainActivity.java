@@ -123,8 +123,11 @@ public class MainActivity extends AppCompatActivity {
         btn3.setText(String.valueOf(val3));
         btn4.setText(String.valueOf(val4));
 
-        // Om alla värden = 0, return, annars crashar appen
-        if (val1+val2+val3+val4 == 0) return;
+        // Om något värde är 0 så return.
+        if (val1 == 0 || val2 == 0 || val3 == 0 || val4 == 0) {
+            textResults.setText("Värden måste vara över 0");
+            return;
+        }
 
         // Mata in värdena i Chi-2-uträkningen och ta emot resultatet
         // i en Double-variabel
@@ -151,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
          *    med signifikansnivån, visa reultatet åt användaren
          *
          */
-
         if (pValue < 0.05)
         {
             dep = "signifikant";
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 procent2
         )));
 
-        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.2f \n Signifikansnivå: %.2f \n Resultatet är med %.2f% sannolikhet inte oberoende och kan betraktas som %s",
+        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.2f \n Signifikansnivå: %.2f \n Resultatet är med %.2f sannolikhet inte oberoende och kan betraktas som %s",
                 chi2,
                 pValue,
                 sign,
