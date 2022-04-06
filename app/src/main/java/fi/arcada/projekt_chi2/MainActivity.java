@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     Button btn1, btn2, btn3, btn4;
     // Deklarera 4 heltalsvariabler för knapparnas värden
     int val1, val2, val3, val4;
-
+    double procent1;
+    double procent2;
     TextView textOut, textWelcome, textResults, textProcent1, textProcent2, testGrp1, testGrp2, test1, test2, statement;
 
     int launchCount= 0;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             pref("reset");
         }
 
+
         // Slutligen, kör metoden som ska räkna ut allt!
         calculate();
     }
@@ -98,10 +100,14 @@ public class MainActivity extends AppCompatActivity {
             prefEditor.putInt("val2",0);
             prefEditor.putInt("val3",0);
             prefEditor.putInt("val4",0);
+
         }
         else {
             prefEditor.putInt(val, sharedPref.getInt(val, 0) + 1);
         }
+
+
+
         prefEditor.apply();
     }
 
@@ -110,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
      * Metod som uppdaterar layouten och räknar ut själva analysen.
      */
     public void calculate() {
+
+
+
 
         // Hämtar sparade värden
         val1 = sharedPref.getInt("val1", 0);
@@ -138,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
 
         double sign = Double.parseDouble(sharedPref.getString("Signifikansnivå","0.05"));
 
-        double prop = 100 - pValue;
+        double prop = 100 - (pValue*100);
 
-        double procent1 = (val1 / (val1+val3)) * 100;
-        double procent2 = (val2 / (val2+val4)) * 100;
+            procent1 = Math.round((double) val1 / (val1 + (double) val3) * 100);
+            procent2 = Math.round((double) val2 / (val2 + (double) val4) * 100);
 
         String dep;
         /**
@@ -154,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
          *    med signifikansnivån, visa reultatet åt användaren
          *
          */
-        if (pValue < 0.05)
+        if (pValue < sign)
         {
             dep = "signifikant";
         }
@@ -163,16 +172,18 @@ public class MainActivity extends AppCompatActivity {
             dep = "insignifikant";
         }
 
-        textProcent1.setText((String.format("%s: %.2f",
-                (sharedPref.getString("testGrp1","0")),
-                procent1
-        )));
-        textProcent2.setText((String.format("%s: %.2f",
-                (sharedPref.getString("testGrp2","0")),
-                procent2
-        )));
+        if(val1 != 0 || val2 != 0 || val3 != 0 || val4 != 0) {
+            textProcent1.setText((String.format("%s: %.0f",
+                    (sharedPref.getString("testGrp1", "0")),
+                    procent1
+            )));
+            textProcent2.setText((String.format("%s: %.0f",
+                    (sharedPref.getString("testGrp2", "0")),
+                    procent2
+            )));
+        }
 
-        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.2f \n Signifikansnivå: %.2f \n Resultatet är med %.2f sannolikhet inte oberoende och kan betraktas som %s",
+        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.3f \n Signifikansnivå: %.2f \n Resultatet är med %.2f sannolikhet inte oberoende och kan betraktas som %s",
                 chi2,
                 pValue,
                 sign,

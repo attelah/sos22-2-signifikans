@@ -8,33 +8,47 @@ public class Significance {
     /**
      * Metod som räknar ut Chi-två på basis av fyra observerade värden (o1 - o4).
      */
-    double chiResult;
+
 
     public static double chiSquared(int o1, int o2, int o3, int o4) {
 
-        // heltalsvariabler tänkta att få de förväntade värdena
-        int e1, e2, e3, e4;
+
+        double e1, e2, e3, e4;
+
+        double varSum = o1+o2+o3+o4;
 
         /**
          *  Implementera din egen Chi-två-uträkning här!
          *
          *  1.  Räkna de förväntade värdena, spara resultaten i e1 - e4**/
 
-        e1 = ((o1 + o3)*(o1 + o2)) / (o1+o2+o3+o4);
-        e2 = ((o2 + o4)*(o1 + o2)) / (o1+o2+o3+o4);
-        e3 = ((o1 + o3)*(o3 + o4)) / (o1+o2+o3+o4);
-        e4 = ((o2 + o4)*(o3 + o4)) / (o1+o2+o3+o4);
+
+
+        e1 = (o1 + o3)*(o1 + o2) / varSum;
+        e2 = (o2 + o4)*(o1 + o2) / varSum;
+        e3 = (o1 + o3)*(o3 + o4) / varSum;
+        e4 = (o2 + o4)*(o3 + o4) / varSum;
         /**  2.  Använd de observerade värdena (o1 - o4) och de förväntade
         *      värdena (e1 - e4) för att räkna ut Chi-två enligt formeln.**/
-        double x1 = Math.pow(o1-e1, 2) / e1;
-        double x2 = Math.pow(o2-e2, 2) / e2;
-        double x3 = Math.pow(o3-e3, 2) / e3;
-        double x4 = Math.pow(o4-e4, 2) / e4;
+
+        double o1e1 = o1-e1;
+        double o2e2 = o2-e2;
+        double o3e3 = o3-e3;
+        double o4e4 = o4-e4;
+
+        double x1 = Math.pow(o1e1, 2) / e1;
+        double x2 = Math.pow(o2e2, 2) / e2;
+        double x3 = Math.pow(o3e3, 2) / e3;
+        double x4 = Math.pow(o4e4, 2) / e4;
+
+
 
         /**  3.  returnera resultatet
         *      (använd det sedan för att få p-värdet via getP()
         * */
-        return x1+x2+x3+x4;
+        double chiRes = x1 + x2 + x3 + x4;
+
+        return chiRes;
     }
 
 
