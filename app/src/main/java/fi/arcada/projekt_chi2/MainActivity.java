@@ -173,17 +173,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(val1 != 0 || val2 != 0 || val3 != 0 || val4 != 0) {
-            textProcent1.setText((String.format("%s: %.0f",
+            textProcent1.setText((String.format("%s: %.0f%%",
                     (sharedPref.getString("testGrp1", "0")),
                     procent1
             )));
-            textProcent2.setText((String.format("%s: %.0f",
+            textProcent2.setText((String.format("%s: %.0f%%",
                     (sharedPref.getString("testGrp2", "0")),
                     procent2
             )));
         }
 
-        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.3f \n Signifikansnivå: %.2f \n Resultatet är med %.2f sannolikhet inte oberoende och kan betraktas som %s",
+        textResults.setText(String.format(" Chi-2 resultat: %.2f\n P-värde: %.3f \n Signifikansnivå: %.2f \n Resultatet är med %.2f%% sannolikhet inte oberoende och kan betraktas som %s",
                 chi2,
                 pValue,
                 sign,
