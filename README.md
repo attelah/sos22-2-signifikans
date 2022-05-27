@@ -1,1 +1,2 @@
-## Projekt 2 - Chi-två-signifikansanalys i Android
+## # Statistics and probability
+A project in statistics and probability, android application, significant calculator
